@@ -55,10 +55,10 @@ public class SortArrayList {
 		SortArrayList sorter = new SortArrayList();
 		
 		sorter.loadData();
-		System.out.println("¿øº» µ¥ÀÌÅÍ=======================");
+		System.out.println("ì›ë³¸ ë°ì´í„°=======================");
 		sorter.printList();
 		sorter.listSort();
-		System.out.println("ArrayList Sort ¿À¸§Â÷¼ø=======================");
+		System.out.println("ArrayList Sort ì˜¤ë¦„ì°¨ìˆœ=======================");
 		sorter.printList();
 	}
 	
@@ -77,7 +77,7 @@ public class SortArrayList {
 		arrList.add(emp5);
 	}
 	
-	// ¿À¸§Â÷¼ø
+	// ì˜¤ë¦„ì°¨ìˆœ
 	void listSort()
 	{
 		Collections.sort(arrList, new Comparator<Employee>() {
@@ -89,7 +89,7 @@ public class SortArrayList {
 				{
 					return 1;
 				}
-				else if(p1.getAge() > p2.getAge())
+				else if(p1.getAge() < p2.getAge())
 				{
 					return -1;
 				}
