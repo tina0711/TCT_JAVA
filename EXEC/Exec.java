@@ -1,7 +1,9 @@
 package test1.com;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.Scanner;
 
@@ -11,15 +13,17 @@ public class Exec {
 		// TODO Auto-generated method stub
 		Exec exec = new Exec();
 		
-		exec.execCommand();
+		String msg = "ABCDEFG10";
+		exec.execCommandStdOut(msg);
+		exec.execCommandStdIn();
 		
 	}
 	
-	public String execCommand() {
+	public String execCommandStdIn() {
 		
 		Process process = null;
 		Scanner scan = new Scanner(System.in);
-		// /c ¸í·É¾î Ã³¸®°¡ ³¡³ª¸é cmd¸¦ Á¾·áÇÏ¶ó
+		// /c ëª…ë ¹ì–´ ì²˜ë¦¬ê°€ ëë‚˜ë©´ cmdë¥¼ ì¢…ë£Œí•˜ë¼
 		
 		try {
 			process = new ProcessBuilder("cmd", "/c", "C:\\ssp_workspace\\ssp_java_test\\SUB3\\SIGNAGE.EXE").start();
@@ -56,6 +60,38 @@ public class Exec {
 		}
 				
 		return null;
+		
+	}
+	
+	public String execCommandStdOut(String msg) {
+		
+		Process process = null;
+		// /c ëª…ë ¹ì–´ ì²˜ë¦¬ê°€ ëë‚˜ë©´ cmdë¥¼ ì¢…ë£Œí•˜ë¼
+		
+		String command = "C:\\ssp_workspace\\ssp_java_test\\SUB3\\CODECONV.EXE " + msg;
+		String s = ""; 
+		String result = "";
+				
+		try {
+			process = new ProcessBuilder("cmd", "/c", command).start();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		BufferedReader stdOut = new BufferedReader(new InputStreamReader(process.getInputStream()));
+	
+		try {
+			while((s = stdOut.readLine()) != null) {
+				System.out.println(s);
+				result = s;
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return result;
 		
 	}
 }
