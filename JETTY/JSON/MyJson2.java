@@ -30,7 +30,7 @@ public class MyJson {
 		
 		//----------------------------------------------------------//
 		
-		//2. JSON 파싱하기
+		//2-1. JSON 파싱하기
 		String jsonStr1 = "{\"id\":1,\"name\":\"anna\"}";
 		
 		JsonParser parser = new JsonParser();
@@ -42,6 +42,27 @@ public class MyJson {
 		
 		String name = element.getAsJsonObject().get("name").getAsString();
 		System.out.println("name = " + name);
+		
+		//2-2. JSON  Array파싱하기
+		String json =
+	            "{" +
+	                    "    strKey : strValue, " +
+	                    "    numKey: 235.3, " +
+	                    "    arrKey: [arrV1, arrV2, arrV3]," +
+	                    "    objKey: {subKey: subValue}," +
+	                    "    numArrKey: [100, 200, 300]," +
+	                    "    nullKey: null" +
+	                    "}";
+		
+		JsonParser parser1 = new JsonParser();
+		JsonElement element1 = parser1.parse(json) ;
+		
+		JsonArray jsonArray = element1.getAsJsonObject().get("arrKey").getAsJsonArray();
+		
+		for(int i=0; i<jsonArray.size(); i++) {
+			String strArr = jsonArray.get(i).getAsString(); // 인덱스 번호로 접근해서 가져온다. 
+			System.out.println(strArr);
+		}
 		
 		//----------------------------------------------------------//
 		System.out.println("3. 클래스를 Json 문자열로 변환");
