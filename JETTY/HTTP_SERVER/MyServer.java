@@ -19,6 +19,7 @@ public class MyServer {
 		
 		ServletHandler servletHandler = new ServletHandler();
 		servletHandler.addServletWithMapping(MyServlet.class, "/mypath");
+		//servletHandler.addServletWithMapping(MyServlet.class, "/*");
 		server.setHandler(servletHandler);
 		
 		server.start();
