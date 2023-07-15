@@ -28,22 +28,21 @@ public class MyHttpClient {
 	public String sendRequest(String url, String method, String body) {
 		
 		ContentResponse contentRes;
-    String result = "";
+    		String result = "";
 		HttpMethod httpMethod = HttpMethod.fromString(method);
 		
 		try {
-      if(method.equals("GET")){
-  			contentRes = httpClient.newRequest(url).method(httpMethod).send();
-  			result = contentRes.getContentAsString();
-      }else if(method.equals("POST")){
-  
-        Request request = httpClient.newRequest(url).method(httpMethod);
-        request.header(HttpHeader.CONTENT_TYPE, "application/json");
-
-        request.content(new StringContentProvider(body, "utf-8"));
-			  contentRes = request.send();
-        result = contentRes.getContentAsString();
-      }
+      			if(method.equals("GET")){
+  				contentRes = httpClient.newRequest(url).method(httpMethod).send();
+  				result = contentRes.getContentAsString();
+      			}else if(method.equals("POST")){
+  			        Request request = httpClient.newRequest(url).method(httpMethod);
+			        request.header(HttpHeader.CONTENT_TYPE, "application/json");
+			
+			        request.content(new StringContentProvider(body, "utf-8"));
+				contentRes = request.send();
+			        result = contentRes.getContentAsString();
+	     	 	}
 			
 			return result;
 		}catch(InterruptedException e) {
@@ -56,6 +55,34 @@ public class MyHttpClient {
 		
 		return null;
 	}
-	
+
+	/*
+	public String sendRequest(String url, String method, HashMap<Object, Object> headers, String body) {
+		
+		ContentResponse contentRes;
+		HttpMethod httpMethod = HttpMethod.fromString(method);
+		String requestID="";
+		
+		try {
+			Request request = httpClient.newRequest(url).method(httpMethod);
+			
+			for(Entry<Object, Object> o: headers.entrySet()) {
+				request.header(o.getKey().toString(), o.getKey().toString());
+			}
+			contentRes = request.send();
+			String result = contentRes.getContentAsString();
+			
+			return result;
+		}catch(InterruptedException e) {
+			e.printStackTrace();
+		}catch(TimeoutException e) {
+			e.printStackTrace();
+		}catch(ExecutionException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	*/
 	
 }
